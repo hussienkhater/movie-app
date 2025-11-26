@@ -49,34 +49,25 @@ class _SearchTabState extends State<SearchTab> {
           children: [
             const CustomAppBar(title: 'Search'),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                focusNode: _searchFocusNode,
-                style: const TextStyle(color: AppColors.white),
-                onChanged: (value) => searchCubit.searchMovies(value),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor:
-                      _isFocused ? AppColors.grey: AppColors.grey,
-                  hintText: 'Search...',
-                  hintStyle: const TextStyle(color: AppColors.whiteGrey),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: SvgPicture.asset(
-                      AppIcons.search,
-                      color: _isFocused ? AppColors.rateColor : AppColors.whiteGrey,
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  focusNode: _searchFocusNode,
+                  style: const TextStyle(color: AppColors.white),
+                  onChanged: (value) => searchCubit.searchMovies(value),
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SvgPicture.asset(
+                        AppIcons.search,
+                        colorFilter: ColorFilter.mode(
+                          _isFocused ? AppColors.rateColor : AppColors.whiteGrey,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                     ),
                   ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide:
-                        const BorderSide(color: AppColors.white, width: 1),
-                  ),
-                ),
-              ),
-            ),
+                )),
             Expanded(
               child: BlocConsumer<SearchCubit, SearchState>(
                 bloc: searchCubit,

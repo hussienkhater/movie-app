@@ -20,7 +20,7 @@ class SearchCubit extends Cubit<SearchState> {
     switch (result) {
       case SuccessApi<SearchMovieModel>():
         emit(SearchSuccess(result.data.results ?? []));
-        
+
       case ErrorApi<SearchMovieModel>():
         emit(SearchError(result.messageError));
     }

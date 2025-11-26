@@ -23,10 +23,8 @@ class CustomAppBar extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: const TextStyle(
-            color:AppColors.whiteGrey,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: AppColors.whiteGrey,
           ),
         ),
         actions: [

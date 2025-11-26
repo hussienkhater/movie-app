@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 
 abstract class AppDialog {
-  static void showLoadingDialog(BuildContext context, {String message = "Loading..."}) {
+  static void showLoadingDialog(BuildContext context,
+      {String message = "Loading..."}) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -17,10 +19,7 @@ abstract class AppDialog {
               const SizedBox(width: 15),
               Text(
                 message,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.headlineMedium
               ),
             ],
           ),
@@ -33,14 +32,13 @@ abstract class AppDialog {
     showDialog(
       context: context,
       useRootNavigator: true,
-      builder: (context) => AlertDialog(backgroundColor: Colors.white,
-        title: const Text(
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.white,
+        title: Text(
           "Error",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: AppColors.red,
+              ),
         ),
         content: Text(
           message,
