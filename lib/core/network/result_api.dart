@@ -1,4 +1,4 @@
-abstract class ResultApi<T> {}
+sealed class ResultApi<T> {}
 
 class LoadingApi<T> extends ResultApi<T> {}
 

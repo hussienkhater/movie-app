@@ -16,6 +16,8 @@ class TopRatedCubit extends Cubit<TopRatedState> {
         emit(TopRatedSuccess(result.data.results??[]));
       case ErrorApi<TopRatedMoviesModel>():
         emit(TopRatedError(result.messageError));
+      case LoadingApi<TopRatedMoviesModel>():
+        emit(TopRatedLoading());
     }
   }
 }
