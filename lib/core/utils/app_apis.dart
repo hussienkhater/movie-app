@@ -4,4 +4,5 @@ abstract class AppApis {
   static String imageBaseUrl = "https://image.tmdb.org/t/p/w500";
   static const topRatedUrl = '/3/movie/top_rated';
   static const popularMovieUrl = '/3/movie/popular';
+  static const releaseMovieUrl = '/3/movie/upcoming';
 }

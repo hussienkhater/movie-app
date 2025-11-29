@@ -5,6 +5,8 @@ import 'package:movie_app/feature/test_feature/view/widgets/popular_movie_item_w
 import 'package:movie_app/feature/test_feature/view/widgets/top_rated_item_widget.dart';
 import 'package:movie_app/feature/test_feature/view_model/popular_movies_cubit.dart';
 import 'package:movie_app/feature/test_feature/view_model/popular_movies_state.dart';
+import 'package:movie_app/feature/test_feature/view_model/realease_movie_cubit.dart';
+import 'package:movie_app/feature/test_feature/view_model/realease_movie_state.dart';
 import 'package:movie_app/feature/test_feature/view_model/top_rated_cubit.dart';
 import 'package:movie_app/feature/test_feature/view_model/top_rated_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -157,6 +159,73 @@ class _HomeTabState extends State<HomeTab> {
                       child: Text(
                         state.message,
                         style: TextTheme.of(context).bodyMedium,
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text(
+                'Released This Week',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(fontWeight: FontWeight.normal),
+              ),
+            ),
+            SizedBox(height: 12),
+            SizedBox(
+              height: 145,
+              child: BlocBuilder<ReleaseMoviesCubit, ReleaseMoviesState>(
+                bloc: ReleaseMoviesCubit(),
+                builder: (context, state) {
+                  if (state is ReleaseMoviesLoading) {
+                    return Skeletonizer(
+                      effect: const ShimmerEffect(),
+                      enabled: true,
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: 10),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 145,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: AppColors.grey,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          );
+                        },
+                        itemCount: 20,
+                      ),
+                    );
+                  }
+                  if (state is ReleaseMoviesSuccess) {
+                    return ListView.separated(
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 0,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return PopularMovieItemWidget(
+                          imageUrl: state.movies[index].fullPosterReleaseUrl,
+                        );
+                      },
+                      itemCount: state.movies.length,
+                    );
+                  }
+                  if (state is ReleaseMoviesError) {
+                    return Center(
+                      child: Text(
+                        state.message,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     );
                   }
