@@ -40,8 +40,8 @@ dependencies:
   flutter_svg: ^2.2.0
   http: ^1.6.0
   flutter_bloc: ^9.1.1
-  skeletonizer: ^2.1.0+1
-  cached_network_image: ^3.4.1
+  equatable: ^2.0.7
+  shimmer_animation: ^2.1.0
 
 
 dev_dependencies:
